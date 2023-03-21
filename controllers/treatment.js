@@ -11,9 +11,9 @@ const Treatment = require ('../models/Treatment')
 const getTreatment = asyncHandler(async (req, res) => {
     // match the id of the user
     let treatment = {}
-    console.log(req.body.id);
-    if(req.body.id){
-       treatment = await Treatment.find({_id: req.body.id})
+    console.log(req.body._id);
+    if(req.body._id){
+       treatment = await Treatment.find({_id: req.body._id})
     }else{
        treatment = await Treatment.find({})
     }
@@ -54,9 +54,9 @@ const getTreatmentById = asyncHandler(async (req, res) => {
 
 const updateTreatment = asyncHandler(async (req, res) => {
     let treatment = {}
-    console.log(req.body.id);
-    if(req.body.id){
-      treatment = await Treatment.find({_id: req.body.id})
+    console.log(req.body._id);
+    if(req.body._id){
+      treatment = await Treatment.find({_id: req.body._id})
     }else{
       treatment = await Treatment.find({})
     }
@@ -83,7 +83,7 @@ const updateTreatment = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    const updateTreatment = await Treatment.findByIdAndUpdate(req.params.id, req.body, {
+    const updateTreatment = await Treatment.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
     })
 
@@ -122,9 +122,9 @@ console.log(req.body)
 // delete treatment 
 const deleteTreatment = asyncHandler(async (req, res) => {
   let treatment = {}
-  console.log(req.body.id);
-  if(req.body.id){
-     treatment = await Treatment.find({_id: req.body.id})
+  console.log(req.body._id);
+  if(req.body._id){
+     treatment = await Treatment.find({_id: req.body._id})
   }else{
      treatment = await Treatment.find({})
   }
