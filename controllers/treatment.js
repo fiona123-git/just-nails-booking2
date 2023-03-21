@@ -53,7 +53,16 @@ const getTreatmentById = asyncHandler(async (req, res) => {
 
 
 const updateTreatment = asyncHandler(async (req, res) => {
-    const treatment = await Treatment.findById(req.params.id)
+    let treatment = {}
+    console.log(req.body.id);
+    if(req.body.id){
+      treatment = await Treatment.find({_id: req.body.id})
+    }else{
+      treatment = await Treatment.find({})
+    }
+
+   
+    // const treatment = await Treatment.findById(req.params.id)
     
     
     if (!treatment) {treatment
@@ -112,7 +121,14 @@ console.log(req.body)
 
 // delete treatment 
 const deleteTreatment = asyncHandler(async (req, res) => {
-  const treatment = await Treatment.findById(req.params.id)
+  let treatment = {}
+  console.log(req.body.id);
+  if(req.body.id){
+     treatment = await Treatment.find({_id: req.body.id})
+  }else{
+     treatment = await Treatment.find({})
+  }
+
 // if treatment found then remove itg
   if (treatment) {
     await treatment.remove()
