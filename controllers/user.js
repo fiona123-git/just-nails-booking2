@@ -144,12 +144,10 @@ const getUsers = asyncHandler(async (req, res) => {
 })
 
 const getUser = asyncHandler(async(req,res) => {
-         const userID = req.headers.user;
-         const user = await User.find({ userId: userID }).exec();
+  // const users = await User.find({})
 
-         console.log(user)
-       
-         res.status(200).json(user)
+  console.log(req.user)
+  res.json(req.user)
 
 })
 // @desc    Delete user

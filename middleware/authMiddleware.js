@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 const protect = asyncHandler(async (req, res, next) => {
   let token
-
+  console.log(token)
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -16,7 +16,8 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
       req.user = await User.findById(decoded.id).select('-password')// find user id minus passwor
-
+      
+      
       next()
     } catch (error) {
       console.error(error)

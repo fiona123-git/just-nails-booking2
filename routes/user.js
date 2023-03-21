@@ -12,7 +12,17 @@ const {
   updateUser,
   getUser
 } = require('../controllers/user') //routes from user controller
+
+
+
+
+
 const { protect, admin } = require ('../middleware/authMiddleware') //middleware for admin authentication
+
+
+
+router.get('/me',protect,getUser)
+
 // routes for api
 router.route('/').post(registerUser).get(protect, admin, getUsers) 
 router.post('/login', authUser)
@@ -25,6 +35,5 @@ router
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser)
-  router.get('/me',protect,getUser)
 
 module.exports = router
