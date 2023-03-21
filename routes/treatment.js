@@ -11,6 +11,10 @@ const {
 } = require ('../controllers/treatment.js')
 const { protect, admin } = require('../middleware/authMiddleware')
 
+
+
+router.get("/gettreatment",getTreatmentById)
+
 router.route('/').get(getTreatment).post(protect, admin, createTreatment)
 
 

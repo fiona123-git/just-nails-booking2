@@ -10,7 +10,15 @@ const Treatment = require ('../models/Treatment')
 // g
 const getTreatment = asyncHandler(async (req, res) => {
     // match the id of the user
-    const treatment = await Treatment.find(req.params.id)
+    let treatment = {}
+    console.log(req.body.id);
+    if(req.body.id){
+       treatment = await Treatment.find({_id: req.body.id})
+    }else{
+       treatment = await Treatment.find({})
+    }
+ 
+  
  // treatment found
   if (treatment) {
     // respond that treatment is found
@@ -24,18 +32,21 @@ const getTreatment = asyncHandler(async (req, res) => {
     
 })
 // get treatment by id
+
 const getTreatmentById = asyncHandler(async (req, res) => {
   // find treatment by using user logged in  id
-  const treatment = await Treatment.findById(req.params._id)
+
+  console.log(req)
+  // const treatment = await Treatment.findById(req.params._id)
 
   
-     if (treatment) {
+  //    if (treatment) {
     
-    res.json(treatment)
-  } else {
-    res.status(404)
-    throw new Error('treatment not found')
-  }
+  //   res.json(treatment)
+  // } else {
+  //   res.status(404)
+  //   throw new Error('treatment not found')
+  // }
     
 })
 
