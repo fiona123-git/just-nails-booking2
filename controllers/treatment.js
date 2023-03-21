@@ -60,7 +60,8 @@ const updateTreatment = asyncHandler(async (req, res) => {
     }else{
       treatment = await Treatment.find({})
     }
-
+    treatment=treatment[0]
+    console.log(treatment)
    
     // const treatment = await Treatment.findById(req.params.id)
     
@@ -83,6 +84,7 @@ const updateTreatment = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
+    console.log("test req")
     const updateTreatment = await Treatment.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
     })
