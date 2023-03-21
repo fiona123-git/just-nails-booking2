@@ -130,7 +130,7 @@ const deleteTreatment = asyncHandler(async (req, res) => {
   }else{
      treatment = await Treatment.find({})
   }
-
+  treatment=treatment[0]
 // if treatment found then remove itg
   if (treatment) {
     await treatment.remove()
