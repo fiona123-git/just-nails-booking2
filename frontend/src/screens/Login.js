@@ -1,0 +1,13 @@
+/**
+ *  user can login to the main page 
+ */
+
+import React from 'react'
+
+function Login() {
+  return (
+    <div>Login</div>
+  )
+}
+
+export default Login
