@@ -21,10 +21,10 @@ function App() {
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            <Routes path='/admin/userList'element={<UserList />} />
-            <Routes path='/admin/treatmentList'element={<TreatmentList />} />
-            <Routes path='/admin/bookingList'element={<BookingList />} />
-            <Routes path='/Treatments'element={<Treatments />} />
+            <Route path='/admin/userList'element={<UserList />} />
+            <Route path='/admin/treatmentList'element={<TreatmentList />} />
+            <Route path='/admin/bookingList'element={<BookingList />} />
+            <Route path='/Treatments'element={<Treatments />} />
             
           </Routes>
         </div>
