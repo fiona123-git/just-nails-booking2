@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 function Treatments() {
   const [user, setUser] = React.useState({});
+  const [treatment, setTreatment] = React.useState({});
+
   const navigate = useNavigate();
 
   React.useEffect(()=>{
@@ -21,6 +23,7 @@ function Treatments() {
       }
     }).then(res=>{
       console.log(res.data);
+
       setUser(res.data)
     }).catch(e=>{
      navigate("/login")
