@@ -1,10 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import Header from './screens/Header'
+import Header from './components/Header'
 import Welcome from './screens/Welcome'
 import Login from './screens/Login'
 import Register from './screens/Register'
+import Treatments from './screens/Treatments';
+import UserList from './components/Admin/UserList';
+import BookingList from './components/Admin/BookingList';
+import TreatmentList from './components/Admin/TreatmentList';
  // pages to be displayed in the app
 function App() {
   return (
@@ -17,6 +21,11 @@ function App() {
             <Route path='/' element={<Welcome />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Routes path='/admin/userList'element={<UserList />} />
+            <Routes path='/admin/treatmentList'element={<TreatmentList />} />
+            <Routes path='/admin/bookingList'element={<BookingList />} />
+            <Routes path='/Treatments'element={<Treatments />} />
+            
           </Routes>
         </div>
       </Router>

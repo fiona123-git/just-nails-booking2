@@ -31,7 +31,7 @@ connectDB(); //added
 app.use("/api/users", user)
 app.use("/api/treatments", treatments)
 app.use("/api/bookings", booking)
-
+//handle errors
 app.use(notFound)
 app.use(errorHandler)
 

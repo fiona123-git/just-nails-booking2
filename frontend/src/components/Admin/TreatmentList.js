@@ -10,3 +10,13 @@
  * create bookings
  * 
  */
+
+import React from 'react'
+
+function TreatmentList() {
+  return (
+    <div>Treatmentlist</div>
+  )
+}
+
+export default TreatmentList

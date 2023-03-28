@@ -9,13 +9,14 @@
 
  
   import React from 'react'
-  
+  import './../App.css'
   function Welcome() {
     return (
       <div>
 
     <div>
-        Welcome to Just Nails beauty Salon
+       <h1 className="header">Welcome to just nails beauty</h1>
+        <h2>where beautiful nails are made</h2>
     </div>
       </div>
     )
