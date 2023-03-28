@@ -4,7 +4,45 @@
  */
 import React from 'react'
 import { FaUser } from 'react-icons/fa'
+import axios from "axios"
+import { useNavigate } from 'react-router-dom'
+
 function Register() {
+  // const navigate = React.useNavigate();
+  const navigate = useNavigate();
+
+  const [name, setName] = React.useState();
+  const [Password, setPassword] = React.useState();
+  const [Password2, setPassword2] = React.useState();
+  const [email, setemail] = React.useState();
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+
+    if(Password===Password2){
+      console.log(name,email,Password,Password2);
+      axios.post("http://localhost:5000/api/users/",{
+        name: name,
+        email: email,
+        password: Password
+      }).then(res=>{
+        console.log(res)
+        alert("You have created an account")
+        // navigate('/login', { replace: true });
+        navigate("/login")
+
+
+      })
+    }else{
+    
+      alert("Passwords Dont Match")
+
+    }
+
+    
+
+  }
+
   return (
     <div>
         <h1>Register here</h1>
@@ -24,9 +62,9 @@ function Register() {
               className='form-control'
               id='name'
               name='name'
-              value='name'
+              value={name}
               placeholder='Enter your name'
-              onchange='onchange'
+              onChange={e=>{setName(e.target.value)}}
             />
           </div>
           <div className='form-group'>
@@ -35,9 +73,9 @@ function Register() {
               className='form-control'
               id='email'
               name='email'
-              value='email'
+              value={email}
               placeholder='Enter your email'
-              onChange='onchange'
+              onChange={e=>{setemail(e.target.value)}}
             />
           </div>
           <div className='form-group'>
@@ -46,9 +84,9 @@ function Register() {
               className='form-control'
               id='password'
               name='password'
-              value='password'
+              value={Password}
               placeholder='Enter password'
-              onchange='onchange'
+              onChange={e=>{setPassword(e.target.value)}}
             />
           </div>
           <div className='form-group'>
@@ -57,13 +95,16 @@ function Register() {
               className='form-control'
               id='password2'
               name='password2'
-              value='password'
+              value={Password2}
               placeholder='Confirm password'
-              onChange='onchange'
+              onChange={e=>{setPassword2(e.target.value)}}
             />
           </div>
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
+            <button 
+            
+            onClick={handleSubmit}
+            type='submit' className='btn btn-block'>
               Submit
             </button>
           </div>

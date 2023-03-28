@@ -3,9 +3,29 @@
  */
 
 import React from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
-  
+  const navigate = useNavigate();
+  const [Password, setPassword] = React.useState();
+  const [email, setemail] = React.useState();
+
+
+  const handleLogin = (e)=>{
+    e.preventDefault();
+    console.log(email,Password);
+    axios.post("http://localhost:5000/api/users/login",{
+      email: email,
+      password: Password
+    }).then(res=>{
+      console.log(res)
+      alert("You are logged in")
+      localStorage.setItem("token", res.data.token)
+      navigate("/treatments")
+    })
+
+  }
   
     return (
     <div>
@@ -25,9 +45,9 @@ function Login() {
               className='form-control'
               id='email'
               name='email'
-              //value={email}
+              value={email}
               placeholder='Enter your email'
-              //onChange={}
+              onChange={e=>setemail(e.target.value)}
             />
           </div>
           <div className='form-group'>
@@ -36,14 +56,16 @@ function Login() {
               className='form-control'
               id='password'
               name='password'
-              //value={password}
+              value={Password}
               placeholder='Enter password'
-              //onChange={}
+              onChange={e=>setPassword(e.target.value)}
             />
           </div>
 
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
+            <button
+            onClick={handleLogin}
+            type='submit' className='btn btn-block'>
               Submit
             </button>
           </div>
