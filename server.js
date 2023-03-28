@@ -69,7 +69,7 @@ app.use(function (req, res, next) {
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log(`server is listening on 6000 `);
+    console.log(`server is listening on 5000 `);
 })
 
 module.exports = app

@@ -58,9 +58,12 @@ const payload = jwt.verify(req.cookies.token, secret);
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
+  
+  console.log("registering user")
   // to register user require body
   const { name, email, password } = req.body
  // find user 
+ console.log(name, email, password )
   const userExists = await User.findOne({ email })
 // if user exist  throw message user exists
   if (userExists) {
