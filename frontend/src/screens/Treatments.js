@@ -12,6 +12,7 @@ function Treatments() {
   const getTreatmentlists = () =>{ 
     axios.get("http://localhost:5000/api/treatments").then((response) => {
       setTreatment(response.data);
+      console.log(response.data);
     });
   }
   
@@ -83,7 +84,7 @@ function Treatments() {
             <th>Therapy</th>
             <th>Description</th>
             <th>Price</th>
-            
+            <th>action</th>
             <th></th>
           </tr>
 
