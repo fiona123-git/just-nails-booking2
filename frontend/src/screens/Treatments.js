@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom' // import use navigate from react
 
 function Treatments() {
   const [user, setUser] = useState({}); // create user state
-  const [treatment, setTreatment] = useState({}); // create treatment state
+  const [treatment, setTreatment] = useState([]); // create treatment state
 
   const navigate = useNavigate(); // use navigate to navigate 
 
@@ -41,12 +41,33 @@ function Treatments() {
     })
 
 
-  },[]
-  
-  
-   
-  
-  )
+  },[])
+
+  const handleBooking = (e,record) =>{
+    e.preventDefault();
+
+    alert(record.price)
+    const token = localStorage.getItem("token") // this gets the user token
+
+    axios.post("http://localhost:5000/api/bookings",{
+      bookingItems: {"name" : record.therapy,
+      "date": "1231",
+      "time": "12313",
+      "price": record.price,
+      "treatment": record._id,
+    }},{
+      headers:{
+        "Authorization": `Bearer ${token}` // authorization is bearer token
+      }
+    }
+    ).then(res=>{
+      console.log(res)
+      alert("You have made a Booking")
+
+    })
+    
+
+  }
 
   return (
     <div>
@@ -88,6 +109,14 @@ function Treatments() {
                 <input
                   type="text"
                   defaultValue={record.price}
+                 
+                />
+              </td>
+              <td>
+                <input
+                  type="button"
+                  value="Book"
+                  onClick={e=>handleBooking(e,record)}
                  
                 />
               </td>
