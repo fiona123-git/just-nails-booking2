@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom' // import use navigate from react
 
 function Treatments() {
   const [user, setUser] = useState({}); // create user state
-  const [treatment, setTreatment] = useState({}); // create treatment state
+  const [treatment, setTreatment] = useState([]); // create treatment state
 
   const navigate = useNavigate(); // use navigate to navigate 
 
   const getTreatmentlists = () =>{ 
     axios.get("http://localhost:5000/api/treatments").then((response) => {
       setTreatment(response.data);
+      console.log(response.data);
     });
   }
   
@@ -47,7 +48,10 @@ function Treatments() {
    
   
   )
-
+ const handleBooking =(e,i)=>{
+  e.preventDefault();
+  alert(i.price)
+}
   return (
     <div>
       
@@ -62,7 +66,7 @@ function Treatments() {
             <th>Therapy</th>
             <th>Description</th>
             <th>Price</th>
-            
+            <th>action</th>
             <th></th>
           </tr>
 
@@ -89,6 +93,13 @@ function Treatments() {
                   type="text"
                   defaultValue={record.price}
                  
+                />
+              </td>
+              <td>
+                <input
+                  type="button"
+                  value="book"
+                  onClick={ e=>handleBooking (e,record)}
                 />
               </td>
              </tr>
