@@ -84,7 +84,9 @@ function Treatments() {
             <th>Therapy</th>
             <th>Description</th>
             <th>Price</th>
-            <th>action</th>
+            <th>Time and Data</th>
+
+            <th>Action</th>
             <th></th>
           </tr>
 
@@ -112,6 +114,10 @@ function Treatments() {
                   defaultValue={record.price}
                  
                 />
+              </td>
+              <td>
+                <input type="datetime-local" id="datetime" name="datetime"/>
+
               </td>
               <td>
                 <input
