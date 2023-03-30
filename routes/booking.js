@@ -13,6 +13,8 @@ const { protect, admin } = require('../middleware/authMiddleware') // protected 
 
 //
 
+router.route('/').post(protect, setBooking)
+
 
 router
   .route('/:id')

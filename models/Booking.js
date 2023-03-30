@@ -17,7 +17,7 @@ const bookingSchema = new mongoose.Schema(
       time: {
       type: String,
       required: true,
-    },
+},
         price: { type: Number, required: true },
         treatment: {
           type: mongoose.Schema.Types.ObjectId,

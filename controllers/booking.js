@@ -15,7 +15,7 @@ const Booking = require('../models/Booking')// import booking model
 // create new booking 
 const setBooking = asyncHandler(async (req, res) => {
     const {bookingItems}= req.body // variable from mode to require body
-    
+    console.log(req.user)
     
     if (!req.body.bookingItems&&bookingItems.length==0) // if there are no booking items then a booking error happens
      {
