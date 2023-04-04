@@ -11,7 +11,7 @@
  * 
  */
 
-/*import React from 'react'
+import React from 'react'
 
 function TreatmentList() {
   
@@ -133,4 +133,4 @@ function TreatmentList() {
     
 }
 
-export default TreatmentList */
+export default TreatmentList 
