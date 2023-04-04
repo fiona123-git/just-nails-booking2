@@ -84,7 +84,7 @@ function Treatments() {
             <th>Therapy</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Time and Data</th>
+            <th>Time and Date</th>
 
             <th>Action</th>
             <th></th>
