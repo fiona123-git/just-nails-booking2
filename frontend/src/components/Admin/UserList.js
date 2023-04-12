@@ -8,9 +8,100 @@
  * 
  */
 
-import React from 'react'
+import  { useEffect, useState } from "react"; // import useEffect and useState from react
+import axios from "axios"; // import axios from axios
+import { useNavigate } from 'react-router-dom'
+
 function UserList() {
-  
+  const navigate = useNavigate();
+ const[update,setUpdate]=useState({name: "",
+          email: "",
+          })
+
+const [users, setUsers] = useState([])
+
+  const getUserData =()=>{
+   axios.get("http://localhost:5000/api/users").then((response) => { // use axios to get users
+      setUsers(response.data);
+      console.log(response.data);
+    });
+
+    
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+
+  useEffect (()=>{
+
+    const token = localStorage.getItem("token") // this gets the user token
+
+    if(!token){ // if it isnt the right token then go to login
+      navigate("/login")
+      return;
+    }
+    axios.get("http://localhost:5000/api/users/",{ // get api for users
+      headers:{
+        "Authorization": `Bearer ${token}` // authorization is bearer token
+      }
+    }).then(res=>{ // then respond with the data
+      console.log(res.data);
+
+      setUsers(res.data) // set user with data
+    }).catch(e=>{ // catch the error will result to navigate to login
+     navigate("/login") 
+
+    })
+
+
+
+})
+
+function updateList(e) {
+    //stops button from clearing once submitted
+
+    e.preventDefault();
+    let id = e.target.id;
+    console.log({
+      update,
+    });
+    // use axios to update request to the database
+    axios
+      .put(`http://localhost:8000/api/users/${id}`, update)
+      // it recieves the responce of the promise then it accepts
+      .then((res) => {
+        setUpdate({
+          name: "",
+          email: "",
+          
+        });
+        console.log(res.data.message);
+        alert("Updated");
+        getUserData()
+      })
+      .catch((err) => {
+        console.log("Failed to update user");
+        console.log(err.message);
+      });
+  }
+
+
+
+   const deleteList=(e)=> {
+    e.preventDefault();
+    let id = e.target.id;
+    axios.delete(`http://localhost:5000/api/users/${id}`)
+  .then((res) => {
+      console.log(res);
+     getUserData()
+      
+    })
+    .catch((error) => console.log(error));
+  };
+
+ 
   return (
     <div className="container">
    <h1>List of Users</h1>
@@ -25,14 +116,14 @@ function UserList() {
             <th></th>
           </tr>
 
-          {UserList.map((record) => (
+          {users.map((record) => (
             <tr key={record._id}>
               <td>{record.id}</td>
 
               <td>
                 <input
                   type="text"
-                  defaultValue={record.name}
+                  deFaultValue={record.name}
                   onChange={(evt) =>
                     setUpdate({
                       name: evt.target.value,
@@ -77,39 +168,8 @@ function UserList() {
         </tbody>
       </table>
      
-      <h1> Add new user</h1>
-       <div className="form-group">
-      
-       <form>
-      <label>Name</label>
-        
-      <input
-        
-        type="text"
-        onChange={(event) => {
-          setName(event.target.value);
-        }}
-      />
-      <br />
-      
-      <label>Email</label>
-      
-      <input
-        
-        type="text"
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-      />
-      <br />
-      
       
     
-      
-      <button onClick={addTolist}>Add new user</button>
-      </form>
-      
-    </div>
     
     </div>
   );
