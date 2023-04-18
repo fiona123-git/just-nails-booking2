@@ -62,12 +62,14 @@ function Header() {
           </Nav>
           ):(
             <Nav className="me-auto">
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/register">Register</Nav.Link>
             
             <Nav.Link href="/treatments">Treatments</Nav.Link>
-            <NavDropdown title="User" id="username">
-              <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-              <NavDropdown.Item href="/register">
-                Register
+            <NavDropdown title={user.name} id="username">
+              <NavDropdown.Item href="/treatments">Treatments</NavDropdown.Item>
+              <NavDropdown.Item href="/bookings">
+                Bookings
               </NavDropdown.Item>
               
             </NavDropdown>

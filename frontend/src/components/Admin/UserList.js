@@ -106,8 +106,8 @@ function updateList(e) {
  
   return (
     <div className="container">
-   <h1>List of Users</h1>
-   <table className="center">
+   <h1 className="title">List of Users</h1>
+   <table className="center center  table table-hover table-striped bg-info">
         <tbody>
           <tr>
             <th></th>
