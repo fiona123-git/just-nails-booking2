@@ -6,6 +6,7 @@ import Welcome from './screens/Welcome'
 import Login from './screens/Login'
 import Register from './screens/Register'
 import Treatments from './screens/Treatments';
+import Bookings from './screens/Bookings'
 import UserList from './components/Admin/UserList';
 import BookingList from './components/Admin/BookingList';
 import TreatmentList from './components/Admin/TreatmentList';
@@ -26,6 +27,7 @@ function App() {
             <Route path='/admin/treatmentList'element={<TreatmentList />} />
             <Route path='/admin/bookingList'element={<BookingList />} />
             <Route path='/treatments'element={<Treatments />} />
+            <Route path='/bookings'element={<Bookings />} />
             
           </Routes>
         </div>

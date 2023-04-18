@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
@@ -50,6 +51,7 @@ h3 {
   padding: 20px 0;
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 60px;
+  
 }
 
 .header ul {
@@ -62,13 +64,19 @@ h3 {
   margin-left: 20px;
 }
 
+.navbar .navbar-brand,
+.navbar .navbar-nav .nav-link {
+  color: white;
+
+}
+
 .header ul li a {
   display: flex;
   align-items: center;
 }
 
 .header ul li a:hover {
-  color: #777;
+  color: #8b8383;
 }
 
 .header ul li a svg {
@@ -80,6 +88,7 @@ h3 {
   font-weight: 700;
   margin-bottom: 50px;
   padding: 0 20px;
+  margin-top:  150px;
 }
 
 .heading p {
@@ -124,9 +133,10 @@ h1 {
 }
 
 .title {
-  margin: auto;
+  margin-top: 100px;
   width: 50%;
   text-align: center;
+  margin-bottom: 100px;
 }
 
 .form,

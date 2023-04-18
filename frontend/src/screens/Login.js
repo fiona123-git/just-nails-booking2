@@ -22,7 +22,12 @@ function Login() {
       console.log(res)
       alert("You are logged in")
       localStorage.setItem("token", res.data.token)
-      navigate("/treatments")
+      if(res.data.isAdmin){
+        navigate("/admin/")
+      }else{
+        navigate("/treatments")
+      }
+      
     })
 
   }

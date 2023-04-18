@@ -5,39 +5,81 @@
  * else if user info equals user then it goes to user login or register
  */
 
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom' // import use navigate from react-router-dom
+
 
 function Header() {
+  const [user,setUser]= useState({})
+  const navigate = useNavigate(); // use navigate to navigate 
+
+  useEffect(()=>{
+     const token = localStorage.getItem("token") // this gets the user token
+
+    if(!token){ // if it isnt the right token then go to login
+      navigate("/login")
+      return;
+    }
+    axios.get("http://localhost:5000/api/users/me",{ // get api for users
+      headers:{
+        "Authorization": `Bearer ${token}` // authorization is bearer token
+      }
+    }).then(res=>{ // then respond with the data
+      console.log(res.data);
+
+      setUser(res.data) // set user with data
+    }).catch(e=>{ // catch the error will result to navigate to login
+     navigate("/login") 
+
+    })
+
+  },[])
   return (
     <div>
-<Navbar bg="light" expand="lg">
+   <Nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar text-dark">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">just nails</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+          {user.isAdmin ? (
+         <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            
+            <NavDropdown title="Admin" id="adminmenu">
+              <NavDropdown.Item href="/admin/bookingList">Booking List</NavDropdown.Item>
+              <NavDropdown.Item href="/admin/userList">
+                User list
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="/admin/treatmentList">Treatment list</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
+              
             </NavDropdown>
           </Nav>
+          ):(
+            <Nav className="me-auto">
+            
+            <Nav.Link href="/treatments">Treatments</Nav.Link>
+            <NavDropdown title="User" id="username">
+              <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+              <NavDropdown.Item href="/register">
+                Register
+              </NavDropdown.Item>
+              
+            </NavDropdown>
+          </Nav>
+          
+          )}
+        
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+ </Nav>
 
+    
     </div>
   )
 }

@@ -62,25 +62,45 @@ axios.post("http://localhost:5000/api/treatments",
       .catch((error) => console.log(error));
 }
 
-function updateList(e) {
+function updateList(e,dd) {
     //stops button from clearing once submitted
 
     e.preventDefault();
     let id = e.target.id;
-    console.log({
-      update,
-    });
+    console.log(
+      update, id
+    );
+    const to_update = treatment.filter(r => r._id === id)
+    console.log(to_update)
+    const temp  = {
+      ...to_update[0],
+      price: update.price===""? to_update[0].price: update.price,
+      description: update.description===""? to_update[0].description: update.description,
+      therapy: update.therapy===""? to_update[0].therapy: update.therapy,
+
+    }
+    console.log(temp)
     // use axios to update request to the database
     axios
-      .put(`http://localhost:5000/api/treatments/${id}`, update)
-      // it recieves the responce of the promise then it accepts
+      .put(`http://localhost:5000/api/treatments/${id}`, {
+        ...temp
+      },
+     {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        } 
+)
+      //  recieves the responce of the promise then it accepts
+
       .then((res) => {
         setUpdate({
+          _id:"",
           therapy: "",
           description: "",
           price:""
         });
-        console.log(res.data.message);
+        console.log(res.data);
         alert("Updated");
         getTreatmentData()
       })
@@ -93,12 +113,15 @@ function updateList(e) {
   const deleteList=(e)=> {
     e.preventDefault();
     let _id = e.target.id;
-    axios.delete(`http://localhost:8000/api/treatments/${_id}`,
-    {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+    axios.delete(`http://localhost:5000/api/treatments/${_id}`,{
+      headers:{
+           Authorization: `Bearer ${localStorage.getItem("token")}`,
+
+      },
+      data: {
+        _id: _id
+      }
+    })
   .then((res) => {
       console.log(res);
      getTreatmentData()
@@ -111,8 +134,8 @@ function updateList(e) {
 
   return (
     <div className="container">
-   <h1>List of treatments</h1>
-   <table className="center">
+   <h1 className="heading">List of treatments</h1>
+   <table className="center  table table-hover table-striped bg-secondary">
         <tbody>
           <tr>
             <th></th>
@@ -124,7 +147,7 @@ function updateList(e) {
           </tr>
 
           {treatment.map((record) => (
-            <tr key={record._id}>
+            <tr    key={record._id}>
               <td>{record.id}</td>
 
               <td>
@@ -133,6 +156,7 @@ function updateList(e) {
                   defaultValue={record.therapy}
                   onChange={(evt) =>
                     setUpdate({
+                     ...update,
                       therapy: evt.target.value,
                     })
                   }
@@ -144,7 +168,20 @@ function updateList(e) {
                   defaultValue={record.description}
                   onChange={(evt) =>
                     setUpdate({
+                      ...update,
                       description: evt.target.value,
+                    })
+                  }
+                />
+              </td>
+             <td>
+                <input
+                  type="text"
+                  defaultValue={record.price}
+                  onChange={(evt) =>
+                    setUpdate({
+                      ...update,
+                      price: evt.target.value,
                     })
                   }
                 />
@@ -167,7 +204,7 @@ function updateList(e) {
                   type="button"
                   value="Update"
                   id={record._id}
-                  onClick={updateList}
+                  onClick={e=>updateList (e,record._id)}
                 ></input>
               </td>
             </tr>
@@ -175,7 +212,7 @@ function updateList(e) {
         </tbody>
       </table>
      
-      <h1> Add new treatments</h1>
+      <h2 className='title'> Add new treatments</h2>
        <div className="form-group">
       
        <form>

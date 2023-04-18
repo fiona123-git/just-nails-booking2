@@ -15,8 +15,8 @@ import { useNavigate } from 'react-router-dom'
 function UserList() {
   const navigate = useNavigate();
  const[update,setUpdate]=useState({name: "",
-          email: "",
-          })
+          email: "",}
+          )
 
 const [users, setUsers] = useState([])
 
@@ -79,6 +79,7 @@ function updateList(e) {
         });
         console.log(res.data.message);
         alert("Updated");
+       
         getUserData()
       })
       .catch((err) => {
@@ -95,7 +96,8 @@ function updateList(e) {
     axios.delete(`http://localhost:5000/api/users/${id}`)
   .then((res) => {
       console.log(res);
-     getUserData()
+    
+      getUserData()
       
     })
     .catch((error) => console.log(error));
@@ -123,7 +125,7 @@ function updateList(e) {
               <td>
                 <input
                   type="text"
-                  deFaultValue={record.name}
+                  Value={record.name}
                   onChange={(evt) =>
                     setUpdate({
                       name: evt.target.value,
@@ -134,7 +136,7 @@ function updateList(e) {
               <td>
                 <input
                   type="text"
-                  defaultValue={record.email}
+                  Value={record.email}
                   onChange={(evt) =>
                     setUpdate({
                       email: evt.target.value,

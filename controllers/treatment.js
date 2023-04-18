@@ -54,6 +54,7 @@ const getTreatmentById = asyncHandler(async (req, res) => {
 
 const updateTreatment = asyncHandler(async (req, res) => {
     let treatment = {}
+    console.log("Updating tr")
     console.log(req.body._id);
     if(req.body._id){
       treatment = await Treatment.find({_id: req.body._id})
@@ -85,6 +86,7 @@ const updateTreatment = asyncHandler(async (req, res) => {
     }
 
     console.log("test req")
+    console.log(req.body)
     const updateTreatment = await Treatment.findByIdAndUpdate(req.body._id, req.body, {
         new: true,
     })

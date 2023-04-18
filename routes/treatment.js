@@ -16,6 +16,7 @@ const { protect, admin } = require('../middleware/authMiddleware')
 router.get("/gettreatment",getTreatmentById)
 
 router.route('/').get(getTreatment).post(protect, admin, createTreatment)
+// router.route('/update').get(getTreatment).post(protect, admin, createTreatment)
 
 
 router
