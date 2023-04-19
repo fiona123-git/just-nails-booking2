@@ -26,11 +26,13 @@ function Login() {
         navigate("/admin/")
       }else{
         navigate("/treatments")
+         window.location.reload();
       }
       
     })
 
   }
+
   
     return (
     <div>

@@ -38,9 +38,43 @@ function Header() {
      navigate("/login") 
 
     })
-
+     
     
+
+
   },[])
+ 
+const LogOut = (e)=>{
+    e.preventDefault();
+    const token = localStorage.getItem("token")
+ if(!token){ // if it isnt the right token then go to login
+      navigate("/login")
+      return;
+    }
+    axios.get("http://localhost:5000/api/users/me",{ // get api for users
+      headers:{
+        "Authorization": `Bearer ${token}` // authorization is bearer token
+      }
+    }).then(res=>{ // then respond with the data
+      console.log(res.data);
+     setUser(res.data) 
+     localStorage.removeItem('token')
+    alert('you are logged out')
+      window.location.reload();
+      
+     }).catch(e=>{ // catch the error will result to navigate to login
+     navigate("/login") 
+
+    })
+     
+    
+      
+      
+    
+
+  
+}
+
   return (
     <div>
    <Nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar text-dark">
@@ -72,7 +106,7 @@ function Header() {
              <Nav.Link href="/bookings">Bookings</Nav.Link>
              
             <NavDropdown className="NavDropdown" title={user.name} id="username">
-              <NavDropdown.Item href='/logout'>Logout</NavDropdown.Item>
+              <NavDropdown.Item   onClick={LogOut}>Logout</NavDropdown.Item>
             </NavDropdown>
              
           </Nav>
