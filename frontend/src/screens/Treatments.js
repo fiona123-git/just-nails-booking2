@@ -16,6 +16,7 @@ function Treatments() {
     });
   }
   
+  
   useEffect(() => {
     getTreatmentlists()
   }, []);
@@ -73,11 +74,11 @@ function Treatments() {
   return (
     <div>
       
-      <h1>Welcome {user.name}</h1>
+      <h1 className="title">Welcome {user.name}</h1>
 
-      <h2 className="title">Full Treatment list</h2>
+      
       <h1>List of treatments</h1>
-   <table className="center">
+   <table className="center  center  table table-hover table-striped bg-info">
         <tbody>
           <tr>
             <th></th>

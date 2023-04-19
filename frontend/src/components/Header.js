@@ -18,6 +18,7 @@ function Header() {
   const [user,setUser]= useState({})
   const navigate = useNavigate(); // use navigate to navigate 
 
+  
   useEffect(()=>{
      const token = localStorage.getItem("token") // this gets the user token
 
@@ -38,6 +39,7 @@ function Header() {
 
     })
 
+    
   },[])
   return (
     <div>
@@ -48,7 +50,7 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           {user.isAdmin ? (
          <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/login">Home</Nav.Link>
             
             <NavDropdown title="Admin" id="adminmenu">
               <NavDropdown.Item href="/admin/bookingList">Booking List</NavDropdown.Item>
@@ -65,16 +67,16 @@ function Header() {
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href="/register">Register</Nav.Link>
             
+            
             <Nav.Link href="/treatments">Treatments</Nav.Link>
-            <NavDropdown title={user.name} id="username">
-              <NavDropdown.Item href="/treatments">Treatments</NavDropdown.Item>
-              <NavDropdown.Item href="/bookings">
-                Bookings
-              </NavDropdown.Item>
-              
+             <Nav.Link href="/bookings">Bookings</Nav.Link>
+             
+            <NavDropdown className="NavDropdown" title={user.name} id="username">
+              <NavDropdown.Item href='/logout'>Logout</NavDropdown.Item>
             </NavDropdown>
+             
           </Nav>
-          
+            
           )}
         
         </Navbar.Collapse>
