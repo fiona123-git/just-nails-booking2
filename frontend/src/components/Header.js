@@ -79,12 +79,12 @@ const LogOut = (e)=>{
     <div>
    <Nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar text-dark">
       <Container>
-        <Navbar.Brand href="#home">just nails</Navbar.Brand>
+        <Navbar.Brand href="/">just nails</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {user.isAdmin ? (
          <Nav className="me-auto">
-            <Nav.Link href="/login">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             
             <NavDropdown title="Admin" id="adminmenu">
               <NavDropdown.Item href="/admin/bookingList">Booking List</NavDropdown.Item>

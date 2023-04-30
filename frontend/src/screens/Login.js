@@ -5,11 +5,15 @@
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import {useGoogleLogin} from '@react-oauth/google';
+
 
 function Login() {
   const navigate = useNavigate();
   const [Password, setPassword] = React.useState();
   const [email, setemail] = React.useState();
+
+
 
 
   const handleLogin = (e)=>{
@@ -30,6 +34,9 @@ function Login() {
       }
       
     })
+
+  
+
 
   }
 
@@ -72,11 +79,18 @@ function Login() {
           <div className='form-group'>
             <button
             onClick={handleLogin}
-            type='submit' className='btn btn-block'>
+            type='submit' className="btn btn-lg btn-secondary btn-block">
               Submit
             </button>
           </div>
         </form>
+        <br/>
+        <p> or sign in with social media </p>
+        <br/>
+        <button className="btn btn-danger btn-lg btn-block">
+                    < i className="fab fa-google pr-2"></i> </button>
+      
+       
       </section>
     </>
 
