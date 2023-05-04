@@ -8,36 +8,47 @@
  * 
  */
 
+
+
 const asyncHandler = require('express-async-handler') // import async handler to handle input and returned handler functiond
-const Booking = require('../models/Booking')// import booking model
+const Booking = require('../models/Booking')
+ const user =  require('../models/User')
+ const treatment = require('../models/Treatment')
+// import booking model
 // @desc    Auth user & get token
 
 // create new booking 
 const setBooking = asyncHandler(async (req, res) => {
-    const {bookingItems}= req.body // variable from mode to require body
+    const booking =req.body // variable from mode to require body
     console.log(req.user)
-    console.log(bookingItems)
+    console.log(booking)
     
-    if (!req.body.bookingItems&&bookingItems.length==0) // if there are no booking items then a booking error happens
+    if (booking.length===0) // if bthere are no booking items then a booking error happens
      {
         res.status(400)
-        throw new Error('please add  a field')
+        throw new Error('no booking found')
     } else {
 
     }
     // create new booking from bookingItems and user to be required
-    const newBooking = await Booking.create({
-        bookingItems,
-        user: req.user.id,
+    const bookings = new Booking.create({
+   therapy: req.body.therapy,
+   date: req.body.date,
+   time: req.body.time,
+   price:req.body.price,
+   user: req.user._id,
+   treatment: req.body.treatment_id,
     })
-
-    res.status(200).json(newBooking)
+    
+    createdBooking = await bookings.save()
+    res.status(200).json(createdBooking)
+    console.log(createdBooking)
 })
 
 // get booking by specific id
 const getBookingbyId= asyncHandler(async(res, req) =>{
  //find booking by id
-  const booking = await Booking.find({ userId: req.body.userId });
+  const booking = await Booking.find({_id: req.body.treatment.userId  });
 // if booking found 
   if (booking) {
     // info would be sent 
@@ -72,6 +83,10 @@ const updateBooking = await Booking.findByIdAndUpdate({isAdmin: true
     })
 
     res.status(200).json(updateBooking)
+
+
+
+
 
 
 })

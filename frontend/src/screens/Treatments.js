@@ -52,7 +52,8 @@ function Treatments() {
     const token = localStorage.getItem("token") // this gets the user token
 
     axios.post("http://localhost:5000/api/bookings",{
-      bookingItems: {"name" : record.therapy,
+      booking: 
+      {"therapy" : record.therapy,
       "date": "1231",
       "time": "12313",
       "price": record.price,

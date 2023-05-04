@@ -12,6 +12,7 @@ import BookingList from './components/Admin/BookingList';
 import TreatmentList from './components/Admin/TreatmentList';
  // pages to be displayed in the app
 function App() {
+  
   return (
     <>
       <Router>

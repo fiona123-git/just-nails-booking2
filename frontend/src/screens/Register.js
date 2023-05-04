@@ -18,7 +18,7 @@ function Register() {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-
+      console.log('Submit')
     if(Password===Password2){
       console.log(name,email,Password,Password2);
       axios.post("http://localhost:5000/api/users/",{
@@ -45,7 +45,7 @@ function Register() {
 
   return (
     <div>
-        <h1>Register here</h1>
+      
         <section className='heading'>
         <h1>
           
@@ -103,8 +103,8 @@ function Register() {
           <div className='form-group'>
             <button 
             
-            onClick={handleSubmit}
-            type='submit' className='btn btn-block'>
+            onClick={handleSubmit} 
+            type='submit' className="btn btn-lg btn-secondary btn-block">
               Submit
             </button>
           </div>

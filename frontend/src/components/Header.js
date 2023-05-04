@@ -11,7 +11,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom' // import use navigate from react-router-dom
+import {useNavigate} from 'react-router-dom' // import use navigate from react-router-dom
 
 
 function Header() {
@@ -46,11 +46,8 @@ function Header() {
  
 const LogOut = (e)=>{
     e.preventDefault();
-    const token = localStorage.getItem("token")
- if(!token){ // if it isnt the right token then go to login
-      navigate("/login")
-      return;
-    }
+    
+ const token = localStorage.getItem("token")
     axios.get("http://localhost:5000/api/users/me",{ // get api for users
       headers:{
         "Authorization": `Bearer ${token}` // authorization is bearer token
@@ -63,7 +60,7 @@ const LogOut = (e)=>{
       window.location.reload();
       
      }).catch(e=>{ // catch the error will result to navigate to login
-     navigate("/login") 
+     navigate("/") 
 
     })
      
@@ -98,15 +95,16 @@ const LogOut = (e)=>{
           </Nav>
           ):(
             <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
+            
             
             
             <Nav.Link href="/treatments">Treatments</Nav.Link>
              <Nav.Link href="/bookings">Bookings</Nav.Link>
              
             <NavDropdown className="NavDropdown" title={user.name} id="username">
-              <NavDropdown.Item   onClick={LogOut}>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={LogOut}>Logout</NavDropdown.Item>
             </NavDropdown>
              
           </Nav>
@@ -122,4 +120,4 @@ const LogOut = (e)=>{
   )
 }
 
-export default Header
+export default Header 

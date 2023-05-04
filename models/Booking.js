@@ -7,9 +7,13 @@ const bookingSchema = new mongoose.Schema(
       ref: 'User',
     },
       
-    bookingItems: [
-      {
-        name: { type: String, required: true },
+    
+      
+      therapy: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: 'Treatment',
+        },
         
         date:{type: String,
       required: true},
@@ -17,21 +21,17 @@ const bookingSchema = new mongoose.Schema(
       time: {
       type: String,
       required: true,
-},
+    },
         price: { type: Number, required: true },
-        treatment: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: 'Treatment',
-        },
+        
       },
-    ],
+    
 
     
    
   
   
-  }
+  
 );
 
 const bookingModel = mongoose.model("Booking", bookingSchema);

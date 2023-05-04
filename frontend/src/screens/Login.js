@@ -5,7 +5,7 @@
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-import {useGoogleLogin} from '@react-oauth/google';
+import { Link } from "react-router-dom";
 
 
 function Login() {
@@ -35,7 +35,7 @@ function Login() {
       
     })
 
-  
+   
 
 
   }
@@ -87,10 +87,16 @@ function Login() {
         <br/>
         <p> or sign in with social media </p>
         <br/>
-        <button className="btn btn-danger btn-lg btn-block">
+        <button  className="btn btn-danger btn-lg btn-block"  >
                     < i className="fab fa-google pr-2"></i> </button>
+      <br />
+      <button  className="btn btn-info btn-lg btn-block">
+       <i className="fab fa-facebook pr-2"></i> login with facebook
+      </button>
+      <br/>
+      <p> or register here</p>
       
-       
+       <Link to="/register">Register</Link>
       </section>
     </>
 

@@ -42,5 +42,4 @@ userSchema.pre('save', async function (next) {
   //setting user password to b hashed 
   this.password = await bcrypt.hash(this.password, salt)
 })
-
 module.exports = mongoose.model('User', userSchema)

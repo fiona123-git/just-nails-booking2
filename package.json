@@ -37,6 +37,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
+    "query-string": "^8.1.0",
     "react-google-login": "^5.2.2",
     "react-notifications": "^1.7.4",
     "react-redux": "^8.0.4"
