@@ -90,7 +90,7 @@ function Login() {
         <button  className="btn btn-danger btn-lg btn-block"  >
                     < i className="fab fa-google pr-2"></i> </button>
       <br />
-      <button  className="btn btn-info btn-lg btn-block">
+      <button  className="facebookBtn btn btn-info btn-lg btn-block">
        <i className="fab fa-facebook pr-2"></i> login with facebook
       </button>
       <br/>

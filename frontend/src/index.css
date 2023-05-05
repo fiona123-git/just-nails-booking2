@@ -229,8 +229,7 @@ h1 {
   z-index: 5000;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
+  align-items: center;}
 
 .googleBTN {
   padding: 15px;
@@ -250,7 +249,9 @@ h1 {
 
 }
 
-
+.facebookBtn{
+background-color: darkblue;
+}
 
 @keyframes spin {
   0% {
