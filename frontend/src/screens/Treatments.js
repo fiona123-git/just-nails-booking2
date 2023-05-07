@@ -55,6 +55,29 @@ function Treatments() {
 
     axios
       .post(
+        `http://localhost:5000/api/bookings`,
+        {
+          booking: {
+            therapy: record.therapy,
+            date: "1231",
+            time: "12313",
+            price: record.price,
+            treatment: record._id,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // authorization is bearer token
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        alert("You have made a Booking");
+      });
+
+    axios
+      .post(
         `http://localhost:5000/api/bookings/id`,
         {
           booking: {
