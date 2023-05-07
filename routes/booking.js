@@ -9,18 +9,18 @@ updateBooking,
 deleteBooking
   
 } = require ('../controllers/booking.js') // import controller  for routes
-const { protect, admin } = require('../middleware/authMiddleware') // protected routes by admin
+const { protect} = require('../middleware/authMiddleware') // protected routes by admin
 
 //
 
 router.route('/').post(protect, setBooking)
-
+router.get('/all',protect,getBooking)
 
 router
-  .route('/:id')
-  .get(getBooking)
-  .delete(protect, admin, deleteBooking)
-  .put(protect, admin, updateBooking)
+  .route('/')
+  .get(protect,getBooking)
+  .delete(protect,  deleteBooking)
+  .put(protect,  updateBooking)
   .post(setBooking)
   
 

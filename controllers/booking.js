@@ -74,12 +74,16 @@ const setBooking= asyncHandler(async(req, res)=>{
 // get booking by specific id
 const getBooking= asyncHandler(async(res, req) =>{
  //find booking by id
-  const booking = await Booking.find({user: req.user.id})
-  
+ console.log("req.user")
+ console.log(req.req.user._id)
+  console.log( await req["user"])
+
+  const booking = await Booking.find({user: req.req.user._id})
+  console.log(booking)
 // if booking found 
   if (booking) {
     // info would be sent 
-    res.json(booking)
+    res.res.json(booking)
   } else {
     // message booking not found
     res.status(404)
@@ -91,25 +95,27 @@ const getBooking= asyncHandler(async(res, req) =>{
 
 
 const updateBooking= asyncHandler(async(res, req) =>{
- const booking = await Booking.findById({isAdmin:true})
+ const booking = await Booking.findById({_id:req.req.body.id})
  
- if(!booking){
-    res.status(400)
-    throw new Error('booking not found')
- }
+//  if(!booking){
+//     res.status(400)
+//     throw new Error('booking not found')
+//  }
 
- if (!req.user) {
-        res.status(401)
+ if (!req.req.user) {
+        res.res.status(401)
         throw new Error('User not found')
     }
-if (booking.user.toString() !== req.user.id) {
-        res.status(401)
+if (booking.user.toString() !== req.req.user.id) {
+        res.res.status(401)
         throw new Error('User not authorized')
     }
-const updateBooking = await Booking.findByIdAndUpdate({isAdmin: true
+
+      const updateBooking = await Booking.findByIdAndUpdate(req.req.body._id, req.body, {
+        new: true,
     })
 
-    res.status(200).json(updateBooking)
+    res.res.status(200).json(updateBooking)
 
 
 
@@ -121,22 +127,22 @@ const updateBooking = await Booking.findByIdAndUpdate({isAdmin: true
 // this function deletes the booking
 const deleteBooking= asyncHandler(async(res, req) =>{
 
-const booking = await Booking.findById(req.params.id)
+const booking = await Booking.findById(req.req.body.id)
 // if no booking 
     if (!booking) {
-        res.status(400)
+        res.res.status(400)
         // throw error that booking not found
         throw new Error('booking not found')
     }
     // Check for user
-    if (!req.user) {
-        res.status(401)
+    if (!req.req.user) {
+        res.res.status(401)
         // if user not found throw error that user not found
         throw new Error('User not found')
     }
 
     // turn object to string before checking if user exists
-    if (booking.user.toString() !== req.user.id) {
+    if (booking.user.toString() !== req.req.user.id) {
         res.status(401)
         // if booking doesent is not matched to user error to show user is not authorised
         throw new Error('User not authorized')
@@ -144,8 +150,8 @@ const booking = await Booking.findById(req.params.id)
 
     await booking.remove()// remove booking
 
-    res.status(200).json({
-        id: req.params.id // respond to removal based on id
+    res.res.json({
+        id: req.req.body.id // respond to removal based on id
     })
 })
 
