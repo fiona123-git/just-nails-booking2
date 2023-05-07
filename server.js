@@ -24,7 +24,7 @@ app.use(bodyParser.json()); // this is used to create the req body mode
 //api routes
 const treatments= require ('./routes/treatment') 
 const user = require('./routes/user')   
-//const booking =require('./routes/booking')
+const booking =require('./routes/booking')
 //const social = require('./routes/social')
 
 //cors added
@@ -40,7 +40,7 @@ connectDB(); //added
 //apis
 app.use("/api/users", user)
 app.use("/api/treatments", treatments)
-//app.use("/api/bookings", booking)
+app.use("/api/bookings", booking)
 //app.use("/api/social", social)
 
 

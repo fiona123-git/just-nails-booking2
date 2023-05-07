@@ -4,7 +4,7 @@ const express = require('express') // import express
 const router = express.Router()
 const {
 setBooking,
-getBookingbyId,
+getBooking,
 updateBooking,
 deleteBooking
   
@@ -18,7 +18,7 @@ router.route('/').post(protect, setBooking)
 
 router
   .route('/:id')
-  .get(getBookingbyId)
+  .get(getBooking)
   .delete(protect, admin, deleteBooking)
   .put(protect, admin, updateBooking)
   .post(setBooking)

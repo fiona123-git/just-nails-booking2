@@ -12,19 +12,19 @@
 
 const asyncHandler = require('express-async-handler') // import async handler to handle input and returned handler functiond
 const Booking = require('../models/Booking')
- const user =  require('../models/User')
- const treatment = require('../models/Treatment')
-// import booking model
+ const User =  require('../models/User')
+ const Treatment = require('../models/Treatment')
+// import boking model
 // @desc    Auth user & get token
 
 // create new booking 
-const setBooking = asyncHandler(async (req, res) => {
+/*const setBooking = asyncHandler(async (req, res) => {
     const booking =req.body // variable from mode to require body
     console.log(req.user)
     console.log(booking)
     
-    if (booking.length===0) // if bthere are no booking items then a booking error happens
-     {
+    if (!booking) // if bthere are no booking items then a booking error happens
+     { 
         res.status(400)
         throw new Error('no booking found')
     } else {
@@ -32,23 +32,50 @@ const setBooking = asyncHandler(async (req, res) => {
     }
     // create new booking from bookingItems and user to be required
     const bookings = new Booking.create({
-   therapy: req.body.therapy,
-   date: req.body.date,
-   time: req.body.time,
-   price:req.body.price,
+   //therapy: req.body.therapy,
+   //date: req.body.date,
+   //time: req.body.time,
+   //price:req.body.price
    user: req.user._id,
    treatment: req.body.treatment_id,
+   ...req.body
     })
     
     createdBooking = await bookings.save()
+   
     res.status(200).json(createdBooking)
     console.log(createdBooking)
+})*/
+
+const setBooking= asyncHandler(async(req, res)=>{
+ console.log(req.body)
+ console.log(User)
+
+ if(!req.body){
+   res.status(400)
+        throw new Error('no booking found')
+    }
+
+  const newBooking = new Booking({
+      ...req.body,// array of body
+         user: req.user._id, // user id
+    });
+    await newBooking.save()
+     const treatment = await Treatment.findById(req.body.treatment)
+     treatment.booked= [...treatment.booked, ...req.body.books];
+      await treatment.save();
+      res.status.send({newBooking})
+     
 })
 
+
+
+
 // get booking by specific id
-const getBookingbyId= asyncHandler(async(res, req) =>{
+const getBooking= asyncHandler(async(res, req) =>{
  //find booking by id
-  const booking = await Booking.find({_id: req.body.treatment.userId  });
+  const booking = await Booking.find({user: req.user.id})
+  
 // if booking found 
   if (booking) {
     // info would be sent 
@@ -132,7 +159,7 @@ const booking = await Booking.findById(req.params.id)
 
 module.exports={
 setBooking,
-getBookingbyId,
+getBooking,
 updateBooking,
 deleteBooking
 }
